@@ -1,0 +1,43 @@
+---
+import "../styles/global.css";
+interface Props {
+	title?: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description}>
+    <meta name="author" content="Vintage Voyages Gallery">
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{Astro.props.title || `${ "Vintage Voyages: A Travel Poster Gallery" }`}</title>
+	</head>
+	<body class="bg-vintage-beige">
+    <div class="container mx-auto px-4 py-8">
+			<header class="flex justify-between items-center mb-8">
+				<a href="/" class="text-2xl font-bold text-sepia">Vintage Voyages: A Travel Poster Gallery</a>
+				<nav>
+					<ul class="flex space-x-4">
+						<li><a href="/" class="text-sepia hover:text-muted-blue">Home</a></li>
+						<li><a href="/blog" class="text-sepia hover:text-muted-blue">Gallery</a></li>
+						<li><a href="#" class="text-sepia hover:text-muted-blue">Learn More</a></li>
+						<li><a href="#" class="text-sepia hover:text-muted-blue">Gift Shop</a></li>
+					</ul>
+				</nav>
+			</header>
+			<main>
+				<slot />
+			</main>
+			<footer class="mt-8 py-4 text-center text-sepia">
+				© {new Date().getFullYear()} Vintage Voyages: A Travel Poster Gallery
+			</footer>
+    </div>
+	</body>
+</html>

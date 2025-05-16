@@ -1,0 +1,24 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { format } from 'date-fns';
+
+const posts = await Astro.glob("../../content/blog/**/*.md");
+---
+
+<Layout title="Vintage Voyages Gallery" description="Explore our collection of vintage travel posters.">
+  <main class="container mx-auto py-8">
+    <h1 class="text-3xl font-bold text-sepia mb-4">Vintage Travel Posters Gallery</h1>
+    <ul class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {posts.map((post) => (
+        <li class="bg-white rounded-lg shadow-md p-4">
+          <a href={post.url}>
+            <img src={post.frontmatter.heroImage || "https://placehold.co/400x300.png"} alt={post.frontmatter.heroImageAlt || "Placeholder Image"} class="rounded-lg mb-2" data-ai-hint="travel poster"/>
+            <h2 class="text-xl font-semibold text-sepia hover:text-muted-blue">{post.frontmatter.title}</h2>
+          </a>
+          <p class="text-gray-600 text-sm">Published: {format(new Date(post.frontmatter.pubDate), 'MMMM dd, yyyy')}</p>
+          <p class="text-gray-700">{post.frontmatter.description}</p>
+        </li>
+      ))}
+    </ul>
+  </main>
+</Layout>
